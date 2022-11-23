@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Script for exposing the data-dictionary for a Archi-model in an Excel sheet for analysis.
    Based on jArchi-example "Export tot Excel.ajs"
  */
@@ -20,7 +20,7 @@ var excel = $JExcel.new("Calibri 12 #333333");
 excel.set( { sheet:0, value:"Business-objects" } );
 
 // Set up some headers including unique tags 
-const  alltags = ["Name","Documentation"] ;
+const  alltags = ["Name","Path", "Documentation"] ;
 $('business-object').each(function(o) {
  for (i = 0; i<o.prop().length;i++) {alltags.push(o.prop()[i])};
 });
@@ -36,7 +36,7 @@ var formatHeader = excel.addStyle ({
 
 // Set the headers
 for(var i = 0; i < headers.length; i++) {
-	if (i<2) {
+	if (i<3) {
 	  excel.set(0, i, 0, headers[i], formatHeader);
 	} else {
 	  excel.set(0, i, 0, "Tag."+headers[i], formatHeader);
@@ -49,7 +49,8 @@ for(var i = 0; i < headers.length; i++) {
 	var current_row = 1;
 	$('business-object').each(function(o) {
 	excel.set(0, 0, current_row, o.name);
-	excel.set(0, 1, current_row, o.documentation);
+	excel.set(0, 1, current_row, find_path(o));
+	excel.set(0, 2, current_row, o.documentation);
 //   console.log("---------------");
 //	 console.log(o.name);
 //   console.log(o.documentation);
@@ -74,3 +75,14 @@ else {
 }
 
 
+
+// Function to find the path of an element
+function find_path(element) {
+	var path = "";
+	var parents = $(element).parents();
+	for(i = parents.length - 1; i >= 0; i--) {
+		path += "\\" + parents[i].name;
+	}
+	path += "\\" + selection.first().name;
+    return path;
+};
