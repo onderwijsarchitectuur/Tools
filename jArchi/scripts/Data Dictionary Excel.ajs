@@ -1,8 +1,22 @@
 /*
- * Script for exposing the data-dictionary for a Archi-model in an Excel sheet for analysis.
-   Based on jArchi-example "Export tot Excel.ajs"
- */
- 
+ * Export the data-dictionary
+ * 
+ * Find all business-objets in a model and export its attributes and properties tot Excel
+ *
+ * (c) 2018 Jean-Baptiste Sarrodie, Phillip Beauvoir, (c) 2022 Gerald Groot Roessink
+ * 
+ * Uses MyExcel https://github.com/jsegarra1971/MyExcel
+
+ * This work is licensed under the HUMANS Licence described below.
+ * 
+ * The HUMANS (Help Us Make Archi Noteworthy & Sustainable) licence goal is to bring happiness
+ * to both Archi users and developers. 
+ *
+ * The only restrictions that apply are:
+ *  - You can't redistribute this script.
+ *  - You can't use this script for commercial purposes 
+ * 
+ */ 
  
 // Load MyExcel and JSZip JS file
 load(__DIR__ + "lib/jszip-101.js");
@@ -76,7 +90,7 @@ else {
 
 
 
-// Function to find the path of an element
+// Function to find the path of a element
 function find_path(element) {
 	var path = "";
 	var parents = $(element).parents();
@@ -84,5 +98,6 @@ function find_path(element) {
 		path += "\\" + parents[i].name;
 	}
 	path += "\\" + $(element).first().name;
+//		console.log(path);
     return path;
 };
