@@ -9,3 +9,7 @@ Export Business-objects and its attributes and properties in Excel
 Make a full copy of a view including visual elements, relationships and object
 
 
+- Validate model
+
+Check validity of a model and report in Excel
+
