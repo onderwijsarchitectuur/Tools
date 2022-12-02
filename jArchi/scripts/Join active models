@@ -185,7 +185,8 @@ for(var iv = 0; iv < allviews.length; iv++) {
 
 };
 
-
+// remove temporary ORIG properties
+$('concept').removeProp("ORIG");
 
 // Open in UI
 console.log("Opening model in tree...");
