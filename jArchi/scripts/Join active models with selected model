@@ -165,8 +165,15 @@ for(var iv = 0; iv < allviews.length; iv++) {
 		var rel =  find_copy_concept("ORIG",vr.concept.id); // find relation-copy in new model
  
 		var connection=view_copy.add(rel, obj_copy[vr.source.id], obj_copy[vr.target.id]);
+
+		// bending of relation.
+		var bendpoints = vr.getRelativeBendpoints();
+		for(var k = 0; k < bendpoints.length; k++) {
+			connection.addRelativeBendpoint(bendpoints[k],k)
+		};	
+
 		// if need be: add other attributes 
-		// may be later: relationship to relationship and bending of relations.
+		// may be later: relationship to relationship
 
 	});
 		
@@ -197,3 +204,5 @@ function find_copy_concept(propertyKey, propertyValue) {
     });
 	return found;
 }
+
+
