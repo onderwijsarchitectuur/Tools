@@ -14,7 +14,7 @@
  *  - You can't redistribute this script.
  *  - You can't use this script for commercial purposes 
  * 
- *
+ */
  
 // Show output in the console
 console.show();
@@ -90,7 +90,7 @@ for(var ie = 0; ie < allelements.length; ie++) {
 		elementcopy.prop(key, val );
 //		console.log("Props - ",  key, "=", val);	
 	};
-	// Add an extra property with the id of the original (to find copy in new model)
+	// Add a temporary property with the id of the original (to find copy in new model)
 	elementcopy.prop("ORIG", element.id );
 
 };
@@ -115,7 +115,7 @@ for(var ir = 0; ir < allrelations.length; ir++) {
 		relationcopy.prop(key, val );
 //		console.log("Props - ",  key, "=", val);
 	};
-	// Add an extra property with the id of the original (to find copy in new model)
+	// Add a temporary property with the id of the original (to find copy in new model)
 	relationcopy.prop("ORIG", relation.id );
 };
 
@@ -170,18 +170,20 @@ for(var iv = 0; iv < allviews.length; iv++) {
 		var rel =  find_copy_concept("ORIG",vr.concept.id); // find relation-copy in new model
  
 		var connection=view_copy.add(rel, obj_copy[vr.source.id], obj_copy[vr.target.id]);
+
+		// bending of relation.
+		var bendpoints = vr.getRelativeBendpoints();
+		for(var k = 0; k < bendpoints.length; k++) {
+			connection.addRelativeBendpoint(bendpoints[k],k)
+		};	
+
 		// if need be: add other attributes 
-		// may be later: relationship to relationship and bending of relations.
+		// maybe later: relationship to relationship
+
 
     });
-	
-	
-
 
 };
-
-
-// todo: remove GUID properties
 
 
 
