@@ -19,7 +19,7 @@
  
 // Show output in the console
 console.show();
-console.clear()
+console.clear();
 
 var select=false; 
 selection.filter("view").each(function(view) {
@@ -36,7 +36,7 @@ selection.filter("view").each(function(view) {
 		view_copy.prop(key, val );
 	};
 
-    // add object as grouping
+    // add objects like grouping
 	// note: it should also apply to notes but that isn't working
     var  obj_copy = {} ;
     $(view).find('object').each(function(vo) {
@@ -83,6 +83,13 @@ selection.filter("view").each(function(view) {
     $(view).find('relationship').each(function(vr) {
         var rel = vr.concept;
         var connection=view_copy.add(rel, obj_copy[vr.source.id], obj_copy[vr.target.id]);
+	
+		// bending of relations.
+		var bendpoints = vr.getRelativeBendpoints();
+		for(var k = 0; k < bendpoints.length; k++) {
+			connection.addRelativeBendpoint(bendpoints[k],k)
+		};	
+
 		// if need be: add other attributes 
 		// may be later: relationship to relationship and bending of relations.
 
